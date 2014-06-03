@@ -1,0 +1,5 @@
+---
+
+  - name: 8.1 Set Warning Banner for Standard Login Services
+    shell: grep "Authorized uses only" /etc/issue &&  grep "Authorized uses only" /etc/issue.net && stat /etc/motd
+    #script: ../scripts/8.1.sh    

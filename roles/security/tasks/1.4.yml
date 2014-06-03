@@ -1,0 +1,4 @@
+---
+
+  - name: 1.4 Configure SELinux
+    debug: msg="This section not required"

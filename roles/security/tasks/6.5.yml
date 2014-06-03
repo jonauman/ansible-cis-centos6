@@ -1,0 +1,4 @@
+---
+
+  - name: 6.5 Restrict Access to the su Command
+    command: grep "auth\s\+required\s\+pam_wheel.so .*use_uid" /etc/pam.d/su    

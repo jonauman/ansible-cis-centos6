@@ -1,0 +1,5 @@
+---
+
+  - name: 5.7 Enable IPtables
+    shell: chkconfig --list iptables |grep 3:on
+    #service: name=iptables enabled=yes

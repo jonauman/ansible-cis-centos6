@@ -1,0 +1,55 @@
+---
+
+  - name: 4.2.1.3 Keep All Auditing Information
+    command: grep max_log_file_action /etc/audit/auditd.conf
+
+  - name: 4.2.2 Enable auditd Service
+    shell: chkconfig --list auditd | grep 3:on
+
+  - name: 4.2.3 Enable Auditing for Processes That Start Prior to auditd
+    shell: grep "kernel" /etc/grub.conf|grep audit=1
+
+  - name: 4.2.4 Record Events That Modify Date and Time Information
+    shell: grep "^-a always,exit -F arch=b64 -S adjtimex -S settimeofday -k time-change" /etc/audit/audit.rules
+
+  - name: 4.2.5 Record Events That Modify User/Group Information 
+    command: grep "^-w /etc/security/opasswd -p wa -k identity" /etc/audit/audit.rules
+
+  - name: 4.2.6 Record Events That Modify the System's Network Environment
+    command: grep "^-a always,exit -F arch=b64 -S sethostname -S setdomainname -k system-locale" /etc/audit/audit.rules
+
+  - name: 4.2.7 Record Events That Modify the System's Mandatory Access Controls 
+    command: grep "^-w /etc/selinux/ -p wa -k MAC-policy" /etc/audit/audit.rules
+
+  - name: 4.2.8 Collect Login and Logout Events
+    command: grep "^-w /var/log/faillog -p wa -k logins" /etc/audit/audit.rules
+
+  - name: 4.2.9 Collect Session Initiation Information
+    command: grep "^-w /var/run/utmp -p wa -k session" /etc/audit/audit.rules
+
+  - name: 4.2.10 Collect Discretionary Access Control Permission Modification Events
+    command: grep "^-a always,exit -F arch=b64 -S chmod -S fchmod -S fchmodat -F auid>=500" /etc/audit/audit.rules
+
+  - name: 4.2.11 Collect Unsuccessful Unauthorized Access Attempts to Files
+    debug: msg="NOT REQUIRED"
+
+  - name: 4.2.12 Collect Use of Privileged Commands
+    command: grep "^-a always,exit -F arch=b32 -S creat -S open -S openat -S truncate -S ftruncate" /etc/audit/audit.rules
+
+  - name: 4.2.13 Collect Successful File System Mounts
+    command: grep "^-a always,exit -F arch=b64 -S mount -F auid>=500 -F auid!=4294967295 -k mounts" /etc/audit/audit.rules
+
+  - name: 4.2.14 Collect File Deletion Events by User
+    debug: msg="NOT REQUIRED"
+
+  - name: 4.2.15 Collect Changes to System Administration Scope 
+    command: grep "^-w /etc/sudoers -p wa -k scope" /etc/audit/audit.rules
+
+  - name: 4.2.16 Collect System Administrator Actions
+    command: grep "^-w /var/log/sudo.log -p wa -k actions" /etc/audit/audit.rules
+
+  - name: 4.2.17 Collect Kernel Module Loading and Unloading
+    command: grep "^-a always,exit -F arch=b64 -S init_module -S delete_module -k modules" /etc/audit/audit.rules
+
+  - name: 4.2.18 Make the Audit Configuration Immutable
+    command: grep "^-e 2" /etc/audit/audit.rules

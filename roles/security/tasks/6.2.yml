@@ -1,0 +1,43 @@
+---
+
+  - name: 6.2.1 Set SSH Protocol to 2
+    command: grep "^Protocol 2" /etc/ssh/sshd_config
+
+  - name: 6.2.2 Set LogLevel to INFO
+    command: grep "^LogLevel INFO" /etc/ssh/sshd_config
+
+  - name: 6.2.3 Set Permissions on /etc/ssh/sshd_config
+    shell: stat -L -c "%a %u %g" /etc/ssh/sshd_config |grep "600 0 0"
+
+  - name: 6.2.4 Disable SSH X11 Forwarding
+    command: grep "^X11Forwarding no" /etc/ssh/sshd_config
+
+  - name: 6.2.5 Set SSH MaxAuthTries to 4 or Less
+    command: grep "^MaxAuthTries 4" /etc/ssh/sshd_config
+
+  - name: 6.2.6 Set SSH IgnoreRhosts to Yes
+    command: grep "^IgnoreRhosts yes" /etc/ssh/sshd_config
+
+  - name: 6.2.7 Set SSH HostbasedAuthentication to No
+    command: grep "^HostbasedAuthentication no" /etc/ssh/sshd_config
+
+  - name: 6.2.8 Disable SSH Root Login
+    command: grep "^PermitRootLogin no" /etc/ssh/sshd_config
+
+  - name: 6.2.9 Set SSH PermitEmptyPasswords to No
+    command: grep "^PermitEmptyPasswords no" /etc/ssh/sshd_config
+
+  - name: 6.2.10 Do Not Allow Users to Set Environment Options
+    command: grep "^PermitUserEnvironment no" /etc/ssh/sshd_config
+
+  - name: 6.2.11 Use Only Approved Cipher in Counter Mode
+    command: grep -v "Ciphers aes128-ctr,aes192-ctr,aes256-ctr" /etc/ssh/sshd_config
+
+  - name: 6.2.12 Set Idle Timeout Interval for User Login
+    shell: grep "^ClientAliveInterval 300" /etc/ssh/sshd_config && grep "^ClientAliveCountMax 0" /etc/ssh/sshd_config
+
+  - name: 6.2.13 Limit Access via SSH
+    shell: grep "^AllowUsers" /etc/ssh/sshd_config && grep "^AllowGroups" /etc/ssh/sshd_config && grep "^DenyUsers" /etc/ssh/sshd_config && grep "^DenyGroups" /etc/ssh/sshd_config
+
+  - name: 6.2.14 Set SSH Banner
+    command: grep "^Banner /etc/issue.net" /etc/ssh/sshd_config

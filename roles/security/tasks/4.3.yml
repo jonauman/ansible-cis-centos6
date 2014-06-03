@@ -1,0 +1,5 @@
+---
+
+  - name: 4.3 Configure logrotate
+    debug: msg="This section not required"
+#    lineinfile: dest=/etc/logrotate.d/syslog insertbefore="^/var/log/cron" line="/var/log/boot.log"

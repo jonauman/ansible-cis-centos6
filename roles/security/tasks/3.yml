@@ -1,0 +1,26 @@
+---
+
+  - name: 3.1 Set Daemon umask
+    command: grep umask /etc/sysconfig/init
+    #lineinfile: dest=/etc/sysconfig/init line="umask 027"
+
+  - name: 3.2 Remove X Windows - initab
+    command: grep 'id:3:initdefault' /etc/inittab
+
+  - name: 3.3 Disable Avahi Server
+    shell: test ! $(chkconfig --list | grep avahi-daemon)    
+
+  - name: 3.5 Remove DHCP Server
+    shell: rpmquery -q dhcp|grep "not installed"
+
+  - name: 3.6 Configure Network Time Protocol (NTP) - ipv4
+    command: grep '^restrict default kod nomodify notrap nopeer noquery' /etc/ntp.conf
+
+  - name: 3.6 Configure Network Time Protocol (NTP) - ipv6
+    command: grep '^restrict -6 default kod nomodify notrap nopeer noquery' /etc/ntp.conf
+
+  - name: 3.6 Configure Network Time Protocol (NTP) - server
+    command: grep -E "^server \w+\.\w+\.\w+"  /etc/ntp.conf
+
+  - name: 3.16 Configure Mail Transfer Agent for Local-Only Mode
+    command: grep 'inet_interfaces = localhost' /etc/postfix/main.cf

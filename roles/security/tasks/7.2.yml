@@ -1,0 +1,7 @@
+---
+
+#  - user: name=vboxadd shell=/sbin/nologin
+
+  - name: 7.2 Disable System Accounts
+    shell: 'egrep -v "^\+" /etc/passwd | awk -F: ''($1!="root" && $1!="sync" && $1!="shutdown" && $1!="halt" && $3<500 && !($7="/sbin/nologin" || $7="/bin/false")) {print}''| wc -m|grep ''^0'''
+    

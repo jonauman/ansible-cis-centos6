@@ -1,0 +1,5 @@
+---
+
+  - name: 7.3 Set Default Group for root Account
+    shell: 'grep "^root:" /etc/passwd | cut -f4 -d: | grep ^0'
+#    command: usermod -g 0 root

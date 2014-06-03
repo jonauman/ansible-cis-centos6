@@ -1,0 +1,14 @@
+---
+
+  - name: 1.6.1 Restrict Core Dumps
+    shell: grep "hard core" /etc/security/limits.conf && grep "fs.suid_dumpable = 0" /etc/sysctl.conf
+    #lineinfile: dest=/etc/security/limits.conf regexp="^\* hard core 0" line="* hard core 0"
+    #lineinfile: dest=/etc/sysctl.conf regexp="^fs.suid_dumpable = 0" line="fs.suid_dumpable = 0"
+
+  - name: 1.6.2 Configure ExecShield
+    command: grep "kernel.exec-shield = 1" /etc/sysctl.conf
+    #lineinfile: dest=/etc/sysctl.conf regexp="^kernel.exec-shield = 1" line="kernel.exec-shield = 1"
+
+  - name: 1.6.3 Enable Randomized Virtual Memory Region Placement
+    command: grep "kernel.randomize_va_space = 2" /etc/sysctl.conf
+    #lineinfile: dest=/etc/sysctl.conf regexp="^kernel.randomize_va_space = 2" line="kernel.randomize_va_space = 2"

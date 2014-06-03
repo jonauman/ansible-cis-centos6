@@ -1,0 +1,20 @@
+---
+
+  - name: 1.5.1 Set User/Group Owner on /etc/grub.conf
+    shell: stat -L -c "%u %g" /etc/grub.conf | egrep "0 0"
+#    command: chown root:root /etc/grub.conf
+
+  - name: 1.5.2 Set Permissions on /etc/grub.conf
+    shell: stat -L -c "%a" /etc/grub.conf | egrep ".00"
+#    command: chmod og-rwx /etc/grub.conf
+
+  - name: 1.5.3 Set Boot Loader Password
+    command: grep "^password" /etc/grub.conf
+
+  - name: 1.5.4 Require Authentication for Single-User Mode
+    command: grep SINGLE /etc/sysconfig/init
+#    command: sed -i "/SINGLE/s/sushell/sulogin/" /etc/sysconfig/init
+
+  - name: 1.5.5 Disable Interactive Boot
+    command: grep "^PROMPT=" /etc/sysconfig/init
+#    command: sed -i "/PROMPT/s/yes/no/" /etc/sysconfig/init

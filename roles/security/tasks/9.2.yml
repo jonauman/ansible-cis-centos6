@@ -1,0 +1,27 @@
+---
+
+  - name: 9.2.1 Ensure Password Fields are Not Empty
+    shell: '/bin/cat /etc/shadow | /bin/awk -F: ''($2 == "" ) { print $1 " does not have a password "}'''
+
+  - name: 9.2.2 Verify No Legacy "+" Entries Exist in /etc/passwd File
+    shell: '/bin/grep ''^+:'' /etc/passwd'
+    register: chk_922
+    failed_when: "'+' in chk_922.stderr" 
+
+  - name: 9.2.3 Verify No Legacy "+" Entries Exist in /etc/shadow File
+    shell: '/bin/grep ''^+:'' /etc/shadow'
+    register: chk_923
+    failed_when: "'+' in chk_923.stderr"
+
+  - name: 9.2.4 Verify No Legacy "+" Entries Exist in /etc/group File
+    shell: '/bin/grep ''^+:'' /etc/group'
+    register: chk_924
+    failed_when: "'+' in chk_924.stderr"
+
+  - name: 9.2.5 Verify No UID 0 Accounts Exist Other Than root
+    shell: '/bin/cat /etc/passwd | /bin/awk -F: ''($3 == 0) { print $1 }'' root'
+    register: chk_925
+    failed_when: "'+' in chk_925.stderr"
+
+  - name: SECURITY TEST COMPLETE...PASSED
+    local_action: command echo DONE

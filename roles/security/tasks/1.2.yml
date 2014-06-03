@@ -1,0 +1,11 @@
+---
+
+  - name: 1.2.1 Verify CentOS GPG Key is Installed
+#    command: wget -o /etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-6 http://mirror.centos.org/centos/RPM-GPG-KEY-CentOS-6
+    command: rpm -q --queryformat "%{SUMMARY}\n" gpg-pubkey
+
+  - name: 1.2.2 Verify that gpgcheck is Globally Activated
+#    command: grep gpgcheck=1 /etc/yum.conf
+#    register: 1.2.2 
+#    ignore_errors: true
+    command: grep gpgcheck /etc/yum.conf

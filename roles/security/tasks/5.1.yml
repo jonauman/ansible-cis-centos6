@@ -1,0 +1,7 @@
+---
+
+  - name: 5.1 Modify Network Parameters (Host Only)
+    command: grep "net.ipv4.ip_forward = 0" /etc/sysctl.conf
+
+  - name: 5.1.2 Disable Send Packet Redirects
+    command: grep "net.ipv4.conf.default.send_redirects = 0" /etc/sysctl.conf

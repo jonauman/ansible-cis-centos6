@@ -1,0 +1,44 @@
+---
+
+  - name: 6.1.1 Enable anacron Daemon
+    command: rpm -q cronie-anacron
+    #yum: name=cronie-anacron state=present 
+
+  - name: 6.1.2 Enable crond Daemon
+    shell: chkconfig --list crond | grep 3:on 
+    #service: name=crond enabled=yes
+
+  - name: 6.1.3 Set User/Group Owner and Permission on /etc/anacrontab
+    shell: stat -L -c "%a %u %g" /etc/anacrontab | egrep ".00 0 0"
+    #shell: chown root:root /etc/anacrontab && chmod og-rwx /etc/anacrontab
+
+  - name: 6.1.4 Set User/Group Owner and Permission on /etc/crontab
+    shell: stat -L -c "%a %u %g" /etc/crontab | egrep ".00 0 0"
+    #shell: chown root:root /etc/crontab && chmod og-rwx /etc/crontab
+
+  - name: 6.1.5 Set User/Group Owner and Permission on /etc/cron.hourly
+    shell: stat -L -c "%a %u %g" /etc/cron.hourly | egrep ".00 0 0"
+
+  - name: 6.1.6 Set User/Group Owner and Permission on /etc/cron.daily
+    shell: stat -L -c "%a %u %g" /etc/cron.daily | egrep ".00 0 0"
+    #shell: chown root:root /etc/cron.daily && chmod og-rwx /etc/cron.daily
+
+  - name: 6.1.7 Set User/Group Owner and Permission on /etc/cron.weekly
+    shell: stat -L -c "%a %u %g" /etc/cron.weekly | egrep ".00 0 0"
+    #shell: chown root:root /etc/cron.weekly && chmod og-rwx /etc/cron.weekly
+
+  - name: 6.1.8 Set User/Group Owner and Permission on /etc/cron.monthly
+    shell: stat -L -c "%a %u %g" /etc/cron.monthly | egrep ".00 0 0"
+    #shell: chown root:root /etc/cron.monthly && chmod og-rwx /etc/cron.monthly
+
+  - name: 6.1.9 Set User/Group Owner and Permission on /etc/cron.d
+    shell: stat -L -c "%a %u %g" /etc/cron.d | egrep ".00 0 0"
+    #shell: chown root:root /etc/cron.d && chmod og-rwx /etc/cron.d
+
+  - name: 6.1.10 Restrict at Daemon
+    shell: stat -L -c "%a %u %g" /etc/at.allow | egrep ".00 0 0"
+    #shell: rm -f /etc/at.deny && touch /etc/at.allow && chown root:root /etc/at.allow && chmod og-rwx /etc/at.allow 
+
+  - name: 6.1.11 Restrict at/cron to Authorized Users
+    shell: /bin/ls -l /etc/cron.allow && /bin/ls -l /etc/at.allow && test ! $(ls /etc|grep cron.deny) && test ! $(ls /etc|grep at.deny) && stat -L -c "%a" /etc/cron.allow | grep  '^600' && stat -L -c "%a" /etc/at.allow | grep  '^600'
+    #shell: rm -f /etc/cron.deny && touch /etc/cron.allow && chown root:root /etc/cron.allow && chmod og-rwx /etc/cron.allow

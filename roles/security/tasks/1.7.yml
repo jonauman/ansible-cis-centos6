@@ -1,0 +1,4 @@
+---
+
+  - name: 1.7 Use the Latest OS Release
+    debug: msg="This section not required"

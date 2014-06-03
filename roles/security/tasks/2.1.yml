@@ -1,0 +1,66 @@
+---
+
+  - name: 2.1.1 Remove telnet-server
+    shell: rpmquery -q telnet-server|grep "not installed"
+#    yum: name=telnet-server state=absent
+
+  - name: 2.1.2 Remove telnet Clients
+    shell:  rpmquery -q telnet|grep "not installed"
+#    yum: name=telnet state=absent
+
+  - name: 2.1.3 Remove rsh-server
+    shell:  rpmquery -q rsh-server|grep "not installed"
+#    yum: name=rsh-server state=absent
+
+  - name: 2.1.4 Remove rsh Clients
+    shell:  rpmquery -q rsh|grep "not installed"
+#    yum: name=rsh state=absent
+
+  - name: 2.1.5 Remove NIS Client
+    shell:  rpmquery -q ypbind|grep "not installed"
+#    yum: name=ypbind state=absent
+
+  - name: 2.1.6 Remove NIS Server
+    shell:  rpmquery -q ypserv|grep "not installed"
+#    yum: name=ypserv state=absent
+
+  - name: 2.1.7 Remove tftp
+    shell:  rpmquery -q tftp|grep "not installed"
+#    yum: name=tftp state=absent
+
+  - name: 2.1.8 Remove tftp-server
+    shell:  rpmquery -q tfp-server|grep "not installed"
+#    yum: name=tftp-server state=absent
+
+  - name: 2.1.9 Remove talk
+    shell:  rpmquery -q talk|grep "not installed"
+#    yum: name=talk state=absent
+
+  - name: 2.1.10 Remove talk-server
+    shell:  rpmquery -q talk-server|grep "not installed"
+#    yum: name=talk-server state=absent
+
+  - name: 2.1.11 Remove xinetd
+    shell:  rpmquery -q xinetd|grep "not installed"
+#    yum: name=xinetd state=absent
+
+  - name: 2.1.12 Disable chargen-dgram
+    shell: test ! $(chkconfig --list | grep chargen-dgram)
+
+  - name: 2.1.13 Disable chargen-stream
+    shell: test ! $(chkconfig --list | grep chargen-stream)
+ 
+  - name: 2.1.14 Disable daytime-dgram
+    shell: test ! $(chkconfig --list | grep daytime-dgram)
+
+  - name: 2.1.15 Disable daytime-stream
+    shell: test ! $(chkconfig --list | grep daytime-stream)
+
+  - name: 2.1.16 Disable echo-dgram
+    shell: test ! $(chkconfig --list | grep echo-dgram)
+
+  - name: 2.1.17 Disable echo-stream
+    shell: test ! $(chkconfig --list | grep echo-stream)
+
+  - name: 2.1.18 Disable tcpmux-server
+    shell: test ! $(chkconfig --list | grep tcpmux-server)

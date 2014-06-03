@@ -1,0 +1,4 @@
+---
+
+  - name: 8.2 Remove OS Information from Login Warning Banners
+    shell: "egrep '(\\v|\\r|\\m|\\s)' /etc/issue && egrep '(\\v|\\r|\\m|\\s)' /etc/motd && egrep '(\\v|\\r|\\m|\\s)' /etc/issue.net"

@@ -1,0 +1,9 @@
+---
+  - name: 7.1.1 Set Password Expiration Days
+    command: grep "PASS_MAX_DAYS 90" /etc/login.defs
+
+  - name: 7.1.2 Set Password Change Minimum Number of Days
+    command: grep "PASS_MIN_DAYS 7" /etc/login.defs
+
+  - name: 7.1.3 Set Password Expiring Warning Days
+    command: grep "PASS_WARN_AGE 7" /etc/login.defs

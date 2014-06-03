@@ -1,0 +1,4 @@
+---
+
+  - name: 6.4 Restrict root Login to System Console
+    debug: msg="NOT SCORED"

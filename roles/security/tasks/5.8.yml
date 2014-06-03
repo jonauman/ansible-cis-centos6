@@ -1,0 +1,4 @@
+---
+
+  - name: 5.8 Enable IP6tables 
+    debug: msg="NOT SCORED"

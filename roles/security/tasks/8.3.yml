@@ -1,0 +1,4 @@
+---
+
+  - name: 8.3 Set GNOME Warning Banner
+    debug: msg="NOT SCORED"

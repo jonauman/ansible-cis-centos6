@@ -1,0 +1,5 @@
+---
+
+  - name: 7.5 Lock Inactive User Accounts
+    shell: useradd -D | grep 'INACTIVE=35'
+    #command: useradd -D -f 35

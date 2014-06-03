@@ -1,0 +1,4 @@
+---
+
+  - name: 7.4 Set Default umask for Users - bashrc
+    shell: grep "^\s\+umask 077" /etc/bashrc && grep "^\s\+umask 077" /etc/profile

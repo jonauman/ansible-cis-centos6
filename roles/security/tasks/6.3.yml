@@ -1,0 +1,11 @@
+---
+
+  - name: 6.3.1 Upgrade Password Hashing Algorithm to SHA-512
+    shell: authconfig --test | grep hashing | grep sha512
+    #command: authconfig --passalgo=sha512 --update
+
+  - name: 6.3.2 Set Password Creation Requirement Parameters Using pam_cracklib
+    command: grep "password\s\+required\s\+pam_cracklib.so\s\+try_first_pass retry=3 minlen=14 dcredit=-1 ucredit=-1 ocredit=-1 lcredit=-1" /etc/pam.d/system-auth
+
+  - name: 6.3.4 Limit Password Reuse
+    command: grep "password\s\+sufficient\s\+pam_unix.so .*remember=5" /etc/pam.d/system-auth

@@ -1,0 +1,4 @@
+---
+
+  - name: 5.4 Disable IPv6
+    debug: msg="NOT SCORED"

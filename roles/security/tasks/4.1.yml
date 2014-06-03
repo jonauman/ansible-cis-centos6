@@ -1,0 +1,10 @@
+---
+
+  - name: 4.1.1 Install the rsyslog package
+    command: rpm -q rsyslog
+
+  - name: 4.1.2 Activate the rsyslog Service
+    shell: chkconfig --list rsyslog|grep 3:on
+
+  - name: 4.1.4 Create and Set Permissions on rsyslog Log Files
+    debug: msg="not implemented yet"  
