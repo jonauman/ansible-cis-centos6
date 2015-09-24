@@ -30,4 +30,8 @@ Run:
 
 If all goes well, you will get to the end of the tests. If any test fails, the test will stop there. You can fix the issue and then run it again. All chapters in the Benchmark document are tagged, so if you want to run just one chapter, you can do something like:
 
-`ansible-playbook security.yml -t 1.1` 
+`ansible-playbook security.yml -t 1.1`
+
+## Notes
+
+Some sections of the CIS benchmark were not required for my project, so they have not been implemented. If you require these sections, it should be trivial to copy and paste the commands from the relative section of the CIS CentOS Linux 6 Benchmark document.
